@@ -46,7 +46,6 @@ The code first crawls the website and extracts the text content of all the artic
 I hope this helps!
 ```
 Extract from the Website:
-```
 PINSA PICCOLA
 Pinsa ist die bessere Pizza: extra-knusprig, extra-luftig & extra-lecker! Blitzschnell für Dich zubereitet. Komm auf den (Pinsa-)Geschmack und genieß unsere Pinsa Piccola. Die bessere Hälfte kommt in perfekter Probier-Größe und in acht verschiedenen Varianten. Überzeug Dich selbst, ab 4,75€.
-```
+
