@@ -4,10 +4,10 @@ This repository contains code for a customer service chat bot that uses OpenAI's
 
 # Features
 
-Uses OpenAI's ChatGPT model to generate responses
-Trained on a full dataset of text content from a website
-Can answer questions about the website or provide customer support
-Easy to use and deploy
+- Uses OpenAI's ChatGPT model to generate responses
+- Trained on a full dataset of text content from a website
+- Can answer questions about the website or provide customer support
+- Easy to use and deploy
 
 # Usage
 - [ ] Write Script that automates the installation into a website (Chat window, connection with back end, etc..)
