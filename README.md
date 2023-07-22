@@ -45,7 +45,7 @@ The code first crawls the website and extracts the text content of all the artic
 
 I hope this helps!
 ```
-#Extract from the Website:
+# Extract from the Website:
 PINSA PICCOLA
 Pinsa ist die bessere Pizza: extra-knusprig, extra-luftig & extra-lecker! Blitzschnell für Dich zubereitet. 
 Komm auf den (Pinsa-)Geschmack und genieß unsere Pinsa Piccola. 
