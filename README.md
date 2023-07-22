@@ -16,6 +16,7 @@ Easy to use and deploy
 - [ ] Use LLAMA to make it independet from OpenAI
 - [ ] Write API for LLAMA
 - [ ] Setup server with LLAMA
+- [ ] Export crawl data into a database to not overload website
 # License
 
 The code is licensed under the Affero General Public License (AGPL). This means that you are free to use the code for any purpose, but you cannot sell it or use it to make money. If you modify the code, you must also make your modifications available under the AGPL.
