@@ -12,10 +12,23 @@ f-ck-service is not just another customer service chat bot; it's a bold revoluti
 - No Sitemaps Required: Don't worry about any technical hassles. Our code will crawl your website without needing any sitemaps or other fancy stuff.
 - Lightweight and Efficient: You don't need super-mega-hyper processing power to run f-ck-service. It's designed to be efficient and user-friendly.
 
-## Empowering You with AGPL License
+# License
 
-We believe in the power of sharing knowledge and empowering the community. That's why we've chosen the Affero General Public License (AGPL) for f-ck-service. You can use, modify, and contribute to the code without any restrictions, ensuring it remains available for everyone to benefit from.
+The code is licensed under the Affero General Public License (AGPL). This powerful license grants you the freedom to use, modify, and distribute the code for any non-commercial purpose. However, it strictly forbids any commercial use, which includes selling, licensing, or providing the code as part of any commercial product or service.
 
+Consequences of Violation:
+
+1. Legal Action: Any violation of the AGPL will be considered a breach of the license terms. In such cases, the copyright holder of the original code (the repository maintainers) reserves the right to take legal action to protect their rights.
+
+2. License Termination: If you are found to be in violation of the AGPL, your license to use, modify, or distribute the code will be immediately terminated, and you must cease all usage of the code.
+
+3. Damages: Violation of the AGPL may result in claims for damages caused by the unauthorized commercial use of the code.
+
+The AGPL is designed to ensure that the code remains freely available for everyone in the open-source community and that it can be used for good and not for profit-driven motives.
+
+By using this code, you agree to abide by the AGPL's terms and contribute to the spirit of open-source software, fostering collaboration and innovation.
+
+Remember, we built this project on the belief that technology should empower and uplift the community, not be exploited for commercial gain. Let's keep the code free, open, and beneficial for all!
 ## Embrace the Example
 
 Let's see f-ck-service in action with a Google Bard Simulation:
@@ -39,7 +52,7 @@ f-ck-service Response: "Here are some of the items on the Vapiano menu:
 - Antipasti: Vapiano's antipasti menu includes a variety of small plates, such as bruschetta, calamari, and meatballs.
 - Desserts: Vapiano's dessert menu includes a variety of sweet treats, such as tiramisu, gelato, and cheesecake.
 In addition to these items, Vapiano also offers a variety of drinks, including beer, wine, and cocktails."
-
+```
 As you can see, f-ck-service effortlessly provides accurate and helpful responses based on the website's content.
 
 ## Embrace the Freedom!
