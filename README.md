@@ -9,6 +9,19 @@ This repository contains code for a customer service chat bot that uses OpenAI's
 - Can answer questions about the website or provide customer support
 - Easy to use and deploy
 
+# Why you should use this code:
+
+- It's free. There are no hidden fees or charges. You can use this code to crawl any website you want, without any restrictions.
+- It's easy to set up. You don't need to be a coding expert to use this code. Just follow the instructions in the README, and you'll be up and running in minutes.
+- There's no bullshit pricing. You won't have to pay any monthly or annual fees to use this code. It's completely free, forever. Depending on your Servers Performance there are up to unlimited Chatbots.
+- You don't need sitemaps or any other shit. This code will crawl your website even if you don't have a sitemap. You don't need to worry about any of that technical stuff.
+- It's efficient and lightweight. No need for super-mega-hyper processing power.
+## In addition to these benefits, this code is also:
+
+- Open source. You can view the code on GitHub and contribute to its development.
+- Well-documented. The README includes detailed instructions on how to use the code.
+- Reliable. The code has been tested on a variety of websites and has been found to be reliable.
+
 # Usage
 - [ ] Write Script that automates the installation into a website (Chat window, connection with back end, etc..)
 - [ ] Write How to use
