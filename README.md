@@ -10,7 +10,7 @@ Can answer questions about the website or provide customer support
 Easy to use and deploy
 
 # Usage
-- [ ] Write Script that automates the installation into a website
+- [ ] Write Script that automates the installation into a website (Chat window, connection with back end, etc..)
 - [ ] Write How to use
 - [ ] Write Why you should use this
 # License
