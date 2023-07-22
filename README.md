@@ -11,6 +11,15 @@ f-ck-service is not just another customer service chat bot; it's a bold revoluti
 - Effortless Setup: You don't need to be a coding expert to use f-ck-service. The setup process is straightforward, and you'll be up and running in minutes.
 - No Sitemaps Required: Don't worry about any technical hassles. Our code will crawl your website without needing any sitemaps or other fancy stuff.
 - Lightweight and Efficient: You don't need super-mega-hyper processing power to run f-ck-service. It's designed to be efficient and user-friendly.
+  
+# Usage
+- [ ] Write Script that automates the installation into a website (Chat window, connection with back end, etc..)
+- [ ] Write How to use
+- [X] Write Why you should use this
+- [ ] Use LLAMA to make it independet from OpenAI
+- [ ] Write API for LLAMA
+- [ ] Setup server with LLAMA
+- [ ] Export crawl data into a database to not overload website
 
 # License
 
