@@ -2,16 +2,53 @@ import requests
 from bs4 import BeautifulSoup
 import openai
 import json
+import urlparse
 
+all_content = []
+all_images = []
+all_videos = []
+all_links = []
+visited_links = []
 
 def crawl_website(url):
     response = requests.get(url)
+    visited_links.append(url)
+    for i in visited_links:
+        if(i == url):
+            return
     soup = BeautifulSoup(response.content, "html.parser")
     content = []
+    images = []
+    videos = []
+    links = []
     for article in soup.find_all("article"):
         content.append(article.text)
-    return content
+        image = article.find("img")
+        if image:
+            images.append(image["src"])
+            image_tag = f'<img src="{image["src"]}" alt="{image["alt"]}" />'
+            content.append(image_tag)
+        video = article.find("video")
+        if video:
+            videos.append(video["src"])
+        link = article.find("a")
+        if link:
+            links.append(link["href"])
+    return [content, images, videos, links]
 
+def crawl_website_recursively(url):
+    crawled_site = crawl_website(url)
+    all_content.append(crawled_site[0])
+    all_links = crawled_site[3]
+    for link in all_links:
+        if link not in visited_links and get_domain(link) == get_domain(url):
+            visited_links.append(link)
+            crawl_website_recursively(link)
+
+
+def get_domain(url):
+    domain = urlparse(url).netloc
+    return domain
 
 def train_chatgpt_model(content):
     openai.api_key = "YOUR_API_KEY"
@@ -61,8 +98,10 @@ def customer_service_chat(prompt):
 
 if __name__ == "__main__":
     url = "https://www.example.com"
-content = crawl_website(url)
-train_chatgpt_model(content)
-prompt = "What is this website about?"
-response = customer_service_chat(prompt)
-print(response)
+    crawled_site = crawl_website(url)
+    content = crawled_site[0]
+    all_links = crawled_site[3]
+    train_chatgpt_model(all_content)
+    prompt = "What is this website about?"
+    response = customer_service_chat(prompt)
+    print(response)
