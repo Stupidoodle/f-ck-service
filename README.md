@@ -24,7 +24,7 @@ The code is licensed under the Affero General Public License (AGPL). This means 
 
 We chose the AGPL license because we want to ensure that the code is always available for free and that anyone can use it to improve customer service. We believe that the AGPL is the best way to ensure that the code is used for good and not for profit.
 
-## Example (Google Bard Simulation)
+# Example (Google Bard Simulation)
 ```
 Sure, I can simulate your code with the website https://www.vapiano.de/de/. Here is the output of the code:
 
@@ -45,7 +45,7 @@ The code first crawls the website and extracts the text content of all the artic
 
 I hope this helps!
 ```
-# Extract from the Website:
+## Extract from the Website:
 PINSA PICCOLA
 Pinsa ist die bessere Pizza: extra-knusprig, extra-luftig & extra-lecker! Blitzschnell für Dich zubereitet. 
 Komm auf den (Pinsa-)Geschmack und genieß unsere Pinsa Piccola. 
