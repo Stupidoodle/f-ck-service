@@ -25,7 +25,7 @@ This repository contains code for a customer service chat bot that uses OpenAI's
 # Usage
 - [ ] Write Script that automates the installation into a website (Chat window, connection with back end, etc..)
 - [ ] Write How to use
-- [ ] Write Why you should use this
+- [X] Write Why you should use this
 - [ ] Use LLAMA to make it independet from OpenAI
 - [ ] Write API for LLAMA
 - [ ] Setup server with LLAMA
