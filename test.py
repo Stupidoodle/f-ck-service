@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import openai
 import json
-import urlparse
+import urllib.parse
 
 all_content = []
 all_images = []
@@ -55,7 +55,7 @@ def crawl_website_recursively(url):
 
 
 def get_domain(url):
-    domain = urlparse(url).netloc
+    domain = urllib.parse(url).netloc
     return domain
 
 def train_chatgpt_model(content):
