@@ -118,6 +118,7 @@ if __name__ == "__main__":
     url = "https://www.vapiano.de/de/"
     crawled_site = crawl_website_recursively(url)
     print(visited_links)
+    #webhooktest
     #content = crawled_site[0]
     #all_links = crawled_site[1]
     #train_chatgpt_model(all_content)
