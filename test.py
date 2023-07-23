@@ -1,3 +1,4 @@
+from flask import Flask, render_template, request
 import requests
 from bs4 import BeautifulSoup
 import openai
@@ -102,13 +103,19 @@ def customer_service_chat(prompt):
     )
     return response["choices"][0]["message"]
 
+@app.route("/", methods=["GET", "POST"])
+def index():
+    if request.method == "POST":
+        prompt = request.form["prompt"]
+        response = customer_service_chat(prompt)
+        return render_template("index.html", prompt=prompt, response=response)
+    return render_template("index.html", prompt="", response="")
+
 
 if __name__ == "__main__":
     url = "https://www.example.com"
     crawled_site = crawl_website(url)
     content = crawled_site[0]
-    all_links = crawled_site[3]
+    all_links = crawled_site[1]
     train_chatgpt_model(all_content)
-    prompt = "What is this website about?"
-    response = customer_service_chat(prompt)
-    print(response)
+    app.run(debug=True)
