@@ -1,18 +1,172 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>AI Chatbot</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Service Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Your CSS code here */
+
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .chat-container {
+            width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background-color: #5A5EB9;
+            color: #fff;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .chat-messages {
+            height: 300px;
+            overflow-y: scroll;
+            padding: 15px;
+        }
+
+        .user-message {
+            /* Updated CSS for sent messages (user messages) */
+            background-color: #F4F7F9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            float: right;
+            /* Float sent messages to the right */
+            clear: both;
+            max-width: 80%;
+        }
+
+        .bot-message {
+            /* Updated CSS for bot responses */
+            background-color: #5A5EB9;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            float: left;
+            /* Float bot responses to the left */
+            clear: both;
+            max-width: 80%;
+        }
+
+        .chat-input-container {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            font-size: 16px;
+            border-radius: 5px 0 0 5px;
+            /* Add border radius to the left side */
+        }
+
+        #send-btn {
+            border: none;
+            outline: none;
+            background-color: #5A5EB9;
+            color: #fff;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 0 5px 5px 0;
+            /* Add border radius to the right side */
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>AI Chatbot</h1>
-    <form method="POST">
-        <label for="prompt">Enter your prompt:</label>
-        <input type="text" name="prompt" id="prompt" value="{{ prompt }}">
-        <input type="submit" value="Submit">
-    </form>
-    {% if response %}
-    <h2>Response:</h2>
-    <p>{{ response }}</p>
-    {% endif %}
+    <div class="chat-container">
+        <div class="chat-header">Customer Service Chat</div>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Chat messages will be displayed here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" class="chat-input" id="chat-input" placeholder="Type your message...">
+            <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script>
+        // Your JavaScript code here
+
+        // Function to add a new message to the chat window
+        function addMessage(message, isUser) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            chatMessages.appendChild(messageDiv);
+
+            // Add class based on the message sender (user or bot)
+            if (isUser) {
+                messageDiv.className = 'user-message';
+            } else {
+                messageDiv.className = 'bot-message';
+            }
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to handle user input and fetch bot response
+        function handleUserInput() {
+            const inputElement = document.getElementById('chat-input');
+            const userMessage = inputElement.value.trim();
+            if (userMessage !== '') {
+                addMessage(userMessage, true);
+                inputElement.value = '';
+
+                // Send the user message to the server using AJAX (Assuming the server endpoint is '/')
+                fetch('/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            prompt: userMessage
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        const botResponse = data.response;
+                        addMessage(botResponse, false);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching bot response:', error);
+                    });
+
+            }
+        }
+
+        // Add event listener to the "Send" button
+        document.getElementById('send-btn').addEventListener('click', handleUserInput);
+
+        // Add event listener to the input field to handle "Enter" key press
+        document.getElementById('chat-input').addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+    </script>
 </body>
+
 </html>
