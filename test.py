@@ -11,11 +11,12 @@ all_links = []
 visited_links = []
 
 def crawl_website(url):
+    if url in visited_links:
+        return
+
     response = requests.get(url)
     visited_links.append(url)
-    for i in visited_links:
-        if(i == url):
-            return
+
     soup = BeautifulSoup(response.content, "html.parser")
     content = []
     images = []
@@ -36,14 +37,20 @@ def crawl_website(url):
             links.append(link["href"])
     return [content, images, videos, links]
 
+
 def crawl_website_recursively(url):
+    if url in visited_links:
+        return
+
     crawled_site = crawl_website(url)
     all_content.append(crawled_site[0])
     all_links = crawled_site[3]
+
     for link in all_links:
         if link not in visited_links and get_domain(link) == get_domain(url):
             visited_links.append(link)
             crawl_website_recursively(link)
+
 
 
 def get_domain(url):
