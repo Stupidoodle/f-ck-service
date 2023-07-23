@@ -3,13 +3,31 @@ import requests
 from bs4 import BeautifulSoup
 import openai
 import json
+from urllib.parse import urljoin
 import urllib.parse
+
+app = Flask(__name__)
 
 all_content = []
 all_images = []
 all_videos = []
 all_links = []
 visited_links = []
+
+def get_sublinks(url):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    
+    sublinks = set()
+
+    for link in soup.find_all("a"):
+        href = link.get("href")
+        if href and not href.startswith("#"):
+            sublink = urljoin(url, href)
+            sublinks.add(sublink)
+
+    return sublinks
+
 
 def crawl_website(url):
     if url in visited_links:
@@ -23,39 +41,23 @@ def crawl_website(url):
     images = []
     videos = []
     links = []
-    for article in soup.find_all("article"):
-        content.append(article.text)
-        image = article.find("img")
-        if image:
-            images.append(image["src"])
-            image_tag = f'<img src="{image["src"]}" alt="{image["alt"]}" />'
-            content.append(image_tag)
-        video = article.find("video")
-        if video:
-            videos.append(video["src"])
-        link = article.find("a")
-        if link:
-            links.append(link["href"])
+    content.append(soup.getText())
+    sublinks = get_sublinks(url)
+    all_links.extend(sublinks)
+
+    for link in sublinks:
+        if link not in visited_links and get_domain(link) == get_domain(url):
+            visited_links.append(link)
+            crawl_website(link)
+
     return [content, images, videos, links]
 
 
 def crawl_website_recursively(url):
-    if url in visited_links:
-        return
-
-    crawled_site = crawl_website(url)
-    all_content.append(crawled_site[0])
-    all_links = crawled_site[3]
-
-    for link in all_links:
-        if link not in visited_links and get_domain(link) == get_domain(url):
-            visited_links.append(link)
-            crawl_website_recursively(link)
-
-
+    crawl_website(url)
 
 def get_domain(url):
-    domain = urllib.parse(url).netloc
+    domain = urllib.parse.urlparse(url).netloc
     return domain
 
 def train_chatgpt_model(content):
@@ -113,9 +115,10 @@ def index():
 
 
 if __name__ == "__main__":
-    url = "https://www.example.com"
-    crawled_site = crawl_website(url)
-    content = crawled_site[0]
-    all_links = crawled_site[1]
-    train_chatgpt_model(all_content)
-    app.run(debug=True)
+    url = "https://www.vapiano.de/de/"
+    crawled_site = crawl_website_recursively(url)
+    print(visited_links)
+    #content = crawled_site[0]
+    #all_links = crawled_site[1]
+    #train_chatgpt_model(all_content)
+    #app.run(debug=True)
