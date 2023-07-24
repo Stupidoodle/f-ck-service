@@ -120,9 +120,10 @@ def index():
 if __name__ == "__main__":
     url = "https://www.vapiano.de/de/"
     crawl_website(url)
-    with open("output.txt", "w") as txt_file:
-        my_str = " ".join(content)
-        txt_file.write(my_str)
+    with open("output.txt", "w", encoding="utf-8") as txt_file:
+        for item in content:
+            txt_file.write(item + "\n")
+
     #webhooktest
     train_chatgpt_model(content)
     app.run(debug=True)
