@@ -8,7 +8,7 @@ import urllib.parse
 
 app = Flask(__name__)
 
-all_content = []
+content = []
 all_images = []
 all_videos = []
 all_links = []
@@ -28,33 +28,35 @@ def get_sublinks(url):
 
     return sublinks
 
+# ... (previous code)
 
 def crawl_website(url):
-    if url in visited_links:
-        return
-
+    print("Visiting: " + url)
     response = requests.get(url)
     visited_links.append(url)
 
     soup = BeautifulSoup(response.content, "html.parser")
-    content = []
+    if len(soup.getText()) >= 100:
+        print("Found Content on Site. Appending...")
+        content.append(soup.getText())  # Append to the global content list
+
     images = []
     videos = []
     links = []
-    content.append(soup.getText())
     sublinks = get_sublinks(url)
     all_links.extend(sublinks)
 
     for link in sublinks:
         if link not in visited_links and get_domain(link) == get_domain(url):
             visited_links.append(link)
+            # Use a local content list for each recursive call
             crawl_website(link)
 
-    return [content, images, videos, links]
+    return content
 
 
-def crawl_website_recursively(url):
-    crawl_website(url)
+# ... (rest of the code)
+
 
 def get_domain(url):
     domain = urllib.parse.urlparse(url).netloc
@@ -116,8 +118,10 @@ def index():
 
 if __name__ == "__main__":
     url = "https://www.vapiano.de/de/"
-    crawled_site = crawl_website_recursively(url)
-    print(visited_links)
+    crawl_website(url)
+    with open("output.txt", "w") as txt_file:
+        my_str = " ".join(content)
+        txt_file.write(my_str)
     #webhooktest
     #content = crawled_site[0]
     #all_links = crawled_site[1]
