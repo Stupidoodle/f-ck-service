@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import requests
 from bs4 import BeautifulSoup
 import openai
@@ -106,24 +106,25 @@ def customer_service_chat(prompt):
         "content": prompt
     }],
     )
-    return response["choices"][0]["message"]
+    print(response["choices"][0]["message"]["content"])
+    return response["choices"][0]["message"]["content"]
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        prompt = request.form["prompt"]
+        data = request.get_json()
+        prompt = data.get("prompt", "")
         response = customer_service_chat(prompt)
-        return render_template("index.html", prompt=prompt, response=response)
+        return jsonify({"response": response})
     return render_template("index.html", prompt="", response="")
-
 
 if __name__ == "__main__":
     url = "https://www.vapiano.de/de/"
-    crawl_website(url)
-    with open("output.txt", "w", encoding="utf-8") as txt_file:
-        for item in content:
-            txt_file.write(item + "\n")
+    #crawl_website(url)
+    #with open("output.txt", "w", encoding="utf-8") as txt_file:
+        #for item in content:
+            #txt_file.write(item + "\n")
 
     #webhooktest
-    train_chatgpt_model(content)
+    #train_chatgpt_model(content)
     app.run(debug=True)
