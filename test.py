@@ -5,7 +5,7 @@ import openai
 import json
 from urllib.parse import urljoin
 import urllib.parse
-import credintials
+import credentials
 
 app = Flask(__name__)
 
@@ -64,7 +64,7 @@ def get_domain(url):
     return domain
 
 def train_chatgpt_model(content):
-    openai.api_key = credintials.api_key
+    openai.api_key = credentials.api_key
     training_data = []
     for text in content:
         training_data.append({
@@ -98,7 +98,7 @@ def train_chatgpt_model(content):
 
 
 def customer_service_chat(prompt):
-    openai.api_key = credintials.api_key
+    openai.api_key = credentials.api_key
     response = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo-0613",
     messages = [{
