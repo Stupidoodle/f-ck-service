@@ -5,6 +5,7 @@ import openai
 import json
 from urllib.parse import urljoin
 import urllib.parse
+import credintials
 
 app = Flask(__name__)
 
@@ -63,7 +64,7 @@ def get_domain(url):
     return domain
 
 def train_chatgpt_model(content):
-    openai.api_key = "YOUR_API_KEY"
+    openai.api_key = credintials.api_key
     training_data = []
     for text in content:
         training_data.append({
@@ -97,7 +98,7 @@ def train_chatgpt_model(content):
 
 
 def customer_service_chat(prompt):
-    openai.api_key = "YOUR_API_KEY"
+    openai.api_key = credintials.api_key
     response = openai.ChatCompletion.create(
     model = "gpt-3.5-turbo-0613",
     messages = [{
@@ -123,7 +124,5 @@ if __name__ == "__main__":
         my_str = " ".join(content)
         txt_file.write(my_str)
     #webhooktest
-    #content = crawled_site[0]
-    #all_links = crawled_site[1]
-    #train_chatgpt_model(all_content)
-    #app.run(debug=True)
+    train_chatgpt_model(content)
+    app.run(debug=True)

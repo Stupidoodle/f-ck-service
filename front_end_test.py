@@ -15,7 +15,6 @@ def index():
         prompt = data.get("prompt", "")
         response = customer_service_chat(prompt)
         return jsonify({"response": response})
-
     return render_template("index.html")
 
 if __name__ == "__main__":
